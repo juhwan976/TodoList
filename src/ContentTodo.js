@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { ActivityIndicator, Alert, Dimensions, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Dialog from 'react-native-dialog';
 import PropTypes from 'prop-types';
@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 const ContentTodo = ({ todos, setTodos, loaded }) => {
   const [dialogVisible, setDialogVisible] = useState(false);
   const [editString, setEditString] = useState('');
-  const indexRef = React.useRef(0);
+  const indexRef = useRef(0);
 
 
   const onEdit = () => {

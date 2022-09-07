@@ -199,6 +199,7 @@ namespace JS {
       NSString *cancelButtonKey() const;
       NSString *destructiveButtonKey() const;
       NSString *keyboardType() const;
+      NSString *userInterfaceStyle() const;
 
       Args(NSDictionary *const v) : _v(v) {}
     private:
@@ -284,6 +285,7 @@ saveValueCallback:(RCTResponseSenderBlock)saveValueCallback;
                     animatedNodeTag:(double)animatedNodeTag;
 - (void)addListener:(NSString *)eventName;
 - (void)removeListeners:(double)count;
+- (void)queueAndExecuteBatchedOperations:(NSArray *)operationsAndArgs;
 
 @end
 namespace facebook {
@@ -354,6 +356,7 @@ saveValueCallback:(RCTResponseSenderBlock)saveValueCallback;
                     animatedNodeTag:(double)animatedNodeTag;
 - (void)addListener:(NSString *)eventName;
 - (void)removeListeners:(double)count;
+- (void)queueAndExecuteBatchedOperations:(NSArray *)operationsAndArgs;
 
 @end
 namespace facebook {
@@ -2115,6 +2118,11 @@ inline NSString *JS::NativeAlertManager::Args::destructiveButtonKey() const
 inline NSString *JS::NativeAlertManager::Args::keyboardType() const
 {
   id const p = _v[@"keyboardType"];
+  return RCTBridgingToOptionalString(p);
+}
+inline NSString *JS::NativeAlertManager::Args::userInterfaceStyle() const
+{
+  id const p = _v[@"userInterfaceStyle"];
   return RCTBridgingToOptionalString(p);
 }
 inline facebook::react::LazyVector<NSString *> JS::NativeAnimatedModule::EventMapping::nativeEventPath() const

@@ -13,7 +13,7 @@ const App = () => {
   const [loaded, setLoaded] = useState(false);
   const [visible, setVisible] = useState(false);
 
-  async function getData() {
+  const getData = async () => {
     setVisible(true);
     await AsyncStorage.getItem('todos')
       .then((data) => {
@@ -23,7 +23,6 @@ const App = () => {
         }
         else {
           setTodos(JSON.parse(data));
-          console.log("get to : " + todos);
         }
         setLoaded(true);
       });
@@ -31,33 +30,30 @@ const App = () => {
 
   const setData = async () => {
     setVisible(true);
-    setTodos(todos);
-    console.log("set to : " + todos);
     await AsyncStorage.setItem('todos', JSON.stringify(todos))
       .then((_) => {
         setVisible(false);
       });
   }
 
-  // setTodos 를 사용해도 즉시 업데이트가 반영되는게 아니므로 아래의 구문을 써줘야한다.
-  useEffect(() => {
-    setData();
-  }, [todos]);
-
   useEffect(() => {
     getData();
   }, []);
+
+  useEffect(() => {
+    setData();
+  }, [todos]);
 
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style='dark' />
       <Spinner
         visible={visible}
-        textContent='Loading...'
+        textContent='Doing Something...'
       />
       <InputTodo
+        todos={todos}
         setTodos={setTodos}
-        visible={visible}
       />
       <View style={styles.contentContainer}>
         <ContentTodo

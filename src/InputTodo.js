@@ -1,23 +1,52 @@
 import { useState, useEffect } from "react";
 import * as React from 'react';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
-import Spinner from "react-native-loading-spinner-overlay/lib";
+import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import PropTypes from 'prop-types';
 
-const InputTodo = ({ setTodos, visible }) => {
+const InputTodo = ({ todos, setTodos }) => {
     const [input, setInput] = useState('');
 
     const onSubmit = (event) => {
-        setTodos(prev => ([...prev, input]));
-        setInput('');
+        if (input.length === 0) {
+            Alert.alert(
+                '한 단어 이상 입력해주세요.',
+                '',
+                [
+                    {
+                        text: '확인',
+                        onPress: () => { },
+                    },
+                ],
+            );
+        }
+        else if (todos.includes(input)) {
+            Alert.alert(
+                '이미 있는 항목입니다.\n그래도 추가하시겠습니까?',
+                '',
+                [
+                    {
+                        text: '예',
+                        onPress: () => {
+                            setTodos(prev => ([...prev, input]));
+                            setInput('');
+                        },
+                    }, {
+                        text: '아니오',
+                        onPress: () => {
+                            setInput('');
+                        },
+                    },
+                ],
+            );
+        }
+        else {
+            setTodos(prev => ([...prev, input]));
+            setInput('');
+        }
     }
 
     return (
         <View style={styles.textInputView} >
-            <Spinner
-                visible={visible}
-                textContent="Saving..."
-            />
             <TextInput
                 style={[styles.textInput, styles.textInputHeight]}
                 returnKeyType='done'
@@ -38,8 +67,8 @@ const InputTodo = ({ setTodos, visible }) => {
 }
 
 InputTodo.propTypes = {
+    todos: PropTypes.array.isRequired,
     setTodos: PropTypes.func.isRequired,
-    visible: PropTypes.bool.isRequired,
 }
 
 const styles = StyleSheet.create({

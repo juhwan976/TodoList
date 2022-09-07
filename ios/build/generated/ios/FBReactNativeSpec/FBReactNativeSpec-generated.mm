@@ -317,6 +317,10 @@ namespace facebook {
       return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "removeListeners", @selector(removeListeners:), args, count);
     }
 
+    static facebook::jsi::Value __hostFunction_NativeAnimatedModuleSpecJSI_queueAndExecuteBatchedOperations(facebook::jsi::Runtime& rt, TurboModule &turboModule, const facebook::jsi::Value* args, size_t count) {
+      return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "queueAndExecuteBatchedOperations", @selector(queueAndExecuteBatchedOperations:), args, count);
+    }
+
     NativeAnimatedModuleSpecJSI::NativeAnimatedModuleSpecJSI(const ObjCTurboModule::InitParams &params)
       : ObjCTurboModule(params) {
         
@@ -387,6 +391,9 @@ namespace facebook {
         
         
         methodMap_["removeListeners"] = MethodMetadata {1, __hostFunction_NativeAnimatedModuleSpecJSI_removeListeners};
+        
+        
+        methodMap_["queueAndExecuteBatchedOperations"] = MethodMetadata {1, __hostFunction_NativeAnimatedModuleSpecJSI_queueAndExecuteBatchedOperations};
         
     }
   } // namespace react
@@ -492,6 +499,10 @@ namespace facebook {
       return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "removeListeners", @selector(removeListeners:), args, count);
     }
 
+    static facebook::jsi::Value __hostFunction_NativeAnimatedTurboModuleSpecJSI_queueAndExecuteBatchedOperations(facebook::jsi::Runtime& rt, TurboModule &turboModule, const facebook::jsi::Value* args, size_t count) {
+      return static_cast<ObjCTurboModule&>(turboModule).invokeObjCMethod(rt, VoidKind, "queueAndExecuteBatchedOperations", @selector(queueAndExecuteBatchedOperations:), args, count);
+    }
+
     NativeAnimatedTurboModuleSpecJSI::NativeAnimatedTurboModuleSpecJSI(const ObjCTurboModule::InitParams &params)
       : ObjCTurboModule(params) {
         
@@ -562,6 +573,9 @@ namespace facebook {
         
         
         methodMap_["removeListeners"] = MethodMetadata {1, __hostFunction_NativeAnimatedTurboModuleSpecJSI_removeListeners};
+        
+        
+        methodMap_["queueAndExecuteBatchedOperations"] = MethodMetadata {1, __hostFunction_NativeAnimatedTurboModuleSpecJSI_queueAndExecuteBatchedOperations};
         
     }
   } // namespace react
