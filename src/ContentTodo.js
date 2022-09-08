@@ -97,7 +97,7 @@ const ContentTodo = ({ todos, setTodos, loaded }) => {
           />
           <Dialog.Button
             label='취소'
-            onPress={() => { setDialogVisible(false); }}
+            onPress={() => setDialogVisible(false)}
           />
         </Dialog.Container>
       </ScrollView >) : (

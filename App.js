@@ -14,26 +14,34 @@ const App = () => {
   const [visible, setVisible] = useState(false);
 
   const getData = async () => {
-    setVisible(true);
-    await AsyncStorage.getItem('todos')
-      .then((data) => {
-        setVisible(false);
-        if (data == null) {
-          console.log('Todo is Empty!');
-        }
-        else {
-          setTodos(JSON.parse(data));
-        }
-        setLoaded(true);
-      });
+    try {
+      setVisible(true);
+      await AsyncStorage.getItem('todos')
+        .then((data) => {
+          setVisible(false);
+          if (data == null) {
+            console.log('Todo is Empty!');
+          }
+          else {
+            setTodos(JSON.parse(data));
+          }
+          setLoaded(true);
+        });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   const setData = async () => {
-    setVisible(true);
-    await AsyncStorage.setItem('todos', JSON.stringify(todos))
-      .then((_) => {
-        setVisible(false);
-      });
+    try {
+      setVisible(true);
+      await AsyncStorage.setItem('todos', JSON.stringify(todos))
+        .then((_) => {
+          setVisible(false);
+        });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   useEffect(() => {
